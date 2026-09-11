@@ -1,27 +1,54 @@
-# CMSUI
+# Content-Management-UI
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+Angular UI for a courier / shipment content-management system. Works with [Content-Management-API](https://github.com/hassan7865/Content-Management-API).
 
-## Development server
+## Overview
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Role-based Angular app with three areas:
 
-## Code scaffolding
+- **Public** — home, about, services, login
+- **Admin** — dashboard, users/couriers, customers
+- **Customer** — dashboard and shipment upload
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Uses route guards per area and talks to the ASP.NET Core CMS API.
 
-## Build
+## Stack
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Angular 16 (NgModules)
+- Angular Material / CDK, PrimeNG
+- DataTables (`angular-datatables`)
+- SheetJS (`xlsx`) for spreadsheet import/export
+- TypeScript, RxJS
 
-## Running unit tests
+## Structure
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+src/app/
+  public/       # Marketing + login
+  Admin/        # Admin layout and feature modules
+  Customers/    # Customer layout, upload flows
+  Services/     # HTTP / domain services
+  Guard/        # admin / customer / public guards
+src/environment.ts
+```
 
-## Running end-to-end tests
+## Getting started
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+npm install
+npm start
+# or: ng serve
+```
 
-## Further help
+Build:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+npm run build
+```
+
+Set `BASEURL` in `src/environment.ts` to your CMS API (default: `http://localhost:7040/api`).
+
+## Notes
+
+- Admin and customer routes require a valid session from the API.
+- Keep API keys and production URLs out of committed config when possible.
